@@ -72,7 +72,6 @@
     <Build Include="dbo\Tables\Categories.sql" />
     <Build Include="dbo\Tables\Transactions.sql" />
     <Build Include="Security\db_executor.sql" />
-    <Build Include="Security\BudgetManagementApp.sql" />
     <Build Include="Security\BMDBApp.sql" />
     <Build Include="Security\BMDBApp_1.sql" />
     <Build Include="Security\RoleMemberships.sql" />
