@@ -1,0 +1,71 @@
+﻿@using BudgetManagement.Models.ViewModels
+@model DetailReportViewModel
+
+@{
+    ViewData["Title"] = "Daily Report";
+
+    var generalAmounts = new GeneralAmountViewModel()
+            {
+                Income = Model.TotalIncomeBalance,
+                Expense = Model.TotalExpenseBalance,
+                Total = Model.TotalBalance
+            };
+}
+
+<partial name="_DateNavigationMenu" model="@Model.StartDate"/>
+<partial name="_GeneralAmountView" model="@generalAmounts" />
+
+@if (Model.GroupedTransactions.Count() == 0)
+{
+    <h3>Transactions not found for this date period.</h3>
+}
+else
+{
+    <table class="table">
+        <tbody>
+            @foreach (var groupedTransaction in Model.GroupedTransactions)
+            {
+                <tr class="table-info">
+                    <th>
+                        <span>
+                            @groupedTransaction.TransactionDate.ToString("ddd")
+                        </span>
+                        <span>
+                            @groupedTransaction.TransactionDate.Day
+                        </span>
+                    </th>
+                    <th class="active">@groupedTransaction.IncomeBalance</th>
+                    <th class="pasive">@groupedTransaction.ExpenseBalance</th>
+                </tr>
+                @foreach (var transaction in groupedTransaction.Transactions)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex justify-content-between w-75">
+                                <span>
+                                    <a asp-controller="Transaction" asp-action="Edit"
+                           asp-route-id="@transaction.Id"
+                           asp-route-returnTo="@ViewBag.returnTo">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </span>
+                                <span class="ms-3">
+                                    @transaction.Category
+                                </span>
+                                <span class="ms-3">
+                                    @transaction.Account
+                                </span>
+                            </div>
+                        </td>
+                        <td class="active">
+                            @(transaction.OperationTypeId == OperationType.Income ? transaction.Amount.ToString("N") : null )
+                        </td>
+                        <td class="pasive">
+                            @(transaction.OperationTypeId == OperationType.Expense ? transaction.Amount.ToString("N") : null )
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}

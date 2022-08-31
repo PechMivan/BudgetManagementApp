@@ -1,0 +1,55 @@
+﻿@using BudgetManagement.Models.ViewModels
+@model MonthlyReportViewModel
+
+<partial name="_SubMenu" model="@ReportPeriodicity.Monthly" />
+
+@{
+    ViewData["Title"] = "Monthly Report";
+
+    int lastYear = Model.Year - 1;
+    int nextYear = Model.Year + 1;
+
+    var generalAmountModel = new GeneralAmountViewModel()
+        {
+            Income = Model.Income,
+            Expense = Model.Expense,
+            Total = Model.Total
+        };
+}
+
+<div class="container">
+    <h4 class="my-3">
+        <a asp-route-year="@lastYear"><i class="bi bi-arrow-left-square"></i></a>
+        @Model.Year
+        <a asp-route-year="@nextYear"><i class="bi bi-arrow-right-square"></i></a>
+    </h4>
+</div>
+
+<partial name="_GeneralAmountView" model="generalAmountModel" />
+
+<table class="table">
+    <thead class="table-primary">
+        <tr>
+            <th>Month</th>
+            <th>Incomes</th>
+            <th>Expenses</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var monthlyTransaction in Model.MonthlyTransactions)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Index"
+                    style="text-decoration:none;"
+                   asp-route-month="@monthlyTransaction.Month"
+                   asp-route-year="@Model.Year">
+                        @monthlyTransaction.ReferenceDate.ToString("MMM")
+                    </a>
+                </td>
+                <td class="active">@monthlyTransaction.Income</td>
+                <td class="pasive">@monthlyTransaction.Expense</td>
+            </tr>
+        }
+    </tbody>
+</table>

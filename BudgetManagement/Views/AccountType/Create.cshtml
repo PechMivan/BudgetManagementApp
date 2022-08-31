@@ -1,0 +1,24 @@
+﻿@model AccountType
+
+@{
+    ViewData["title"] = "Create Account Type";
+}
+
+<h1>Create an account type</h1>
+<h5>Autem ullamcorper amet diam dolores magna clita at kasd accusam sed et kasd ipsum dolor ut eu ut no eirmod</h5>
+
+<div class="container">
+    <form asp-controller="AccountType" asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input type="text" asp-for="Name" class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"></partial>
+}

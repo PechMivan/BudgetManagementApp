@@ -1,0 +1,10 @@
+﻿@using BudgetManagement.Models.ViewModels
+@model DetailReportViewModel
+
+@{
+    ViewData["Title"] = "Account Details";
+}
+
+<h1>Account Details for: @ViewBag.AccountName</h1>
+
+<partial name="_DetailedReportView" model="Model"/>

@@ -1,0 +1,44 @@
+﻿@using BudgetManagement.ViewModels
+@model AccountCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Account";
+}
+
+<h1>Create an Account</h1>
+<h5>Ea eum vel stet rebum nonumy delenit justo diam elitr sit ullamcorper eros duo dolore kasd consectetuer quis stet ea</h5>
+
+<div class="container">
+    <form asp-controller="Account" asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="AccountTypeId" class="form-label">Account Type</label>
+            <select asp-for="AccountTypeId" class="form-select" asp-items="Model.AccountTypes"></select>
+            <span asp-validation-for="AccountTypeId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Balance" class="form-label">Balance</label>
+            <input asp-for="Balance" class="form-control" />
+            <span asp-validation-for="Balance" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control" ></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-controller="Account" asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"></partial>
+}

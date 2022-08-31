@@ -1,0 +1,38 @@
+﻿@using BudgetManagement.Models.ViewModels
+@model PaginationResponse
+
+@{
+    var renderPage = string.Concat(Model.BaseURL, "?PageIndex={0}&RecordsPerPages={1}");
+    var previousPageExists = Model.PageIndex > 1;
+    var nextPageExists = Model.PageIndex < Model.TotalPages;
+}
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @if (previousPageExists)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@string.Format(renderPage, Model.PageIndex - 1, @Model.RecordsPerPage)">
+                    Previous
+                </a>
+            </li>
+        }
+        @for (var actualPage = 1; actualPage < @Model.TotalPages + 1; actualPage++)
+        {
+            <li class="page-item @(Model.PageIndex == actualPage ? "active" : null)">
+                <a class="page-link" href=@string.Format(renderPage, actualPage, @Model.RecordsPerPage)>
+                    @actualPage
+                </a>
+            </li>
+        }
+        @if (nextPageExists)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@string.Format(renderPage, Model.PageIndex + 1, @Model.RecordsPerPage)">
+                    Next
+                </a>
+            </li>
+        }
+
+    </ul>
+</nav>

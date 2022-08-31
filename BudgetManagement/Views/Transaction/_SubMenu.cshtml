@@ -1,0 +1,16 @@
+﻿@model ReportPeriodicity
+
+<ul class="nav nav-pills nav-fill justify-content-center mb-3">
+    <li class="nav-item">
+        <a class="nav-link @(Model == ReportPeriodicity.Daily ? "active" : null)" asp-action="Index">Daily</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @(Model == ReportPeriodicity.Weekly ? "active" : null)" asp-action="Weekly">Weekly</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @(Model == ReportPeriodicity.Monthly ? "active" : null)" asp-action="Monthly">Monthly</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @(Model == ReportPeriodicity.Calendar ? "active" : null)" asp-action="Calendar">Calendar</a>
+    </li>
+</ul>

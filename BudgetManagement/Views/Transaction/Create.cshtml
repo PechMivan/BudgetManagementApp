@@ -1,0 +1,60 @@
+﻿@using BudgetManagement.Models.ViewModels
+@model TransactionCreateViewModel
+
+@{
+    ViewData["Title"] = "Create a new transaction";
+}
+
+<h1>Create a new Transaction</h1>
+<h5>Elit diam lorem sanctus diam invidunt sanctus eos sea tempor vel vel lorem lorem hendrerit magna nihil velit praesent quis</h5>
+
+<div class="container">
+    <form asp-controller="Transaction" asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="AccountId" class="form-label"></label>
+            <select asp-for="AccountId" asp-items="Model.Accounts" class="form-select"></select>
+            <span asp-validation-for="AccountId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="OperationTypeId" class="form-label"></label>
+            <select asp-for="OperationTypeId" asp-items="Html.GetEnumSelectList<OperationType>()" class="form-select"></select>
+            <span asp-validation-for="OperationTypeId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CategoryId" class="form-label"></label>
+            <select asp-for="CategoryId" asp-items="Model.Categories" class="form-select"></select>
+            <span asp-validation-for="TransactionDate" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="TransactionDate" class="form-label"></label>
+            <input asp-for="TransactionDate" class="form-control" />
+            <span asp-validation-for="TransactionDate" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Amount" class="form-label"></label>
+            <input asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Note" class="form-label"></label>
+            <input asp-for="Note" class="form-control" />
+            <span asp-validation-for="Note" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/transactionForm.js"></script>
+    <script>
+        const url = "@Url.Action("getCategories")";
+
+        $(function() {
+            getCategories(url)
+        })
+
+    </script>
+}

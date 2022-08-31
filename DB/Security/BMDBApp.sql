@@ -1,0 +1,2 @@
+﻿CREATE USER [BMDBApp] FOR LOGIN [BMDBApp];
+

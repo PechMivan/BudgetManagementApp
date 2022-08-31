@@ -1,0 +1,9 @@
+﻿@model DateTime
+
+<div class="container">
+    <h4 class="my-3">
+        <a asp-route-month="@ViewBag.previousMonth" asp-route-year="@ViewBag.previousYear"><i class="bi bi-arrow-left-square"></i></a>
+        @Model.ToString("MMM") - @Model.Year
+        <a asp-route-month="@ViewBag.nextMonth" asp-route-year="@ViewBag.nextYear"><i class="bi bi-arrow-right-square"></i></a>
+    </h4>
+</div>

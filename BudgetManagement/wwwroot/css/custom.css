@@ -1,0 +1,28 @@
+﻿#sortable {
+    cursor: move;
+}
+
+#general-balances {
+    font-size: 26px;
+}
+
+.active {
+    color: blue;
+}
+
+.pasive {
+    color: red;
+}
+
+.accordion button > span {
+    display: flex;
+    margin-right: 10px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.accordion ul > li {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

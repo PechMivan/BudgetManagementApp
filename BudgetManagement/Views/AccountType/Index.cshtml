@@ -1,0 +1,83 @@
+﻿@using BudgetManagement.Models.ViewModels
+@model PaginationResponse<AccountType>
+
+@{
+    ViewData["Title"] = "Account Types";
+}
+
+<h1>Account Type</h1>
+<h5>Diam invidunt eum illum id amet no aliquip duo congue facer kasd eos elitr et nonumy consetetur dolore esse dolor</h5>
+
+<a asp-action="Create" class="btn btn-primary">Create new</a>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    Name
+                </th>
+                <th class="text-center">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody id="sortable">
+            @foreach (var accountType in Model.Elements)
+            {
+                <tr>
+                    <td>
+                        @accountType.Name
+                    </td>
+                    <td>
+                        <input type="hidden" value="@accountType.Id" class="ids" />
+                        <a class="btn btn-primary float-end ms-3" asp-action="Edit" asp-route-id="@accountType.Id">Edit</a>
+                        <a class="btn btn-danger float-end" asp-action="Delete" asp-route-id="@accountType.Id">Delete</a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    <div class="d-flex w-100 justify-content-center">
+        <partial name="_Pagination" />
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script>
+        const urlSort = '@Url.Action("Sort")';
+        $(function() {
+            $("#sortable").sortable({
+                stop: async function(e, ui) {
+                    await updateSorting();
+                }
+            });
+
+            async function updateSorting() {
+                const ids = getElementsIds();
+                await sendIdsToBackend(ids);
+            }
+
+            function getElementsIds() {
+                const ids = $(".ids").map(function() {
+                    return $(this).val();
+                }).get();
+
+                return ids;
+            }
+
+            async function sendIdsToBackend(ids) {
+                var data = JSON.stringify(ids);
+                await fetch(urlSort, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+            }
+        })
+    </script>
+}

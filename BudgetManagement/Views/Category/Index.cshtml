@@ -1,0 +1,48 @@
+﻿@using BudgetManagement.Models.ViewModels
+@model PaginationResponse<Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h1>Categories</h1>
+<a asp-action="Create" class="btn btn-primary">Create new</a>
+
+<div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Operation
+                    </th>
+                    <th class="text-center">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model.Elements)
+                {
+                    <tr>
+                        <td>
+                            @category.Name
+                        </td>
+                        <td>
+                            @category.OperationTypeId.ToString()
+                        </td>
+                        <td>
+                            <a class="btn btn-danger float-end ms-3" asp-action="Delete" asp-route-id="@category.Id">Delete</a>
+                            <a class="btn btn-primary float-end" asp-action="Edit" asp-route-id="@category.Id">Edit</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        <div class="d-flex w-100 justify-content-center">
+            <partial name="_Pagination" />
+        </div>
+</div>

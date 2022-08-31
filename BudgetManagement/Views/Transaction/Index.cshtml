@@ -1,0 +1,19 @@
+﻿@using BudgetManagement.Models.ViewModels
+@model DetailReportViewModel
+
+@{
+    ViewData["Title"] = "Daily Report";
+}
+
+<partial name="_SubMenu" model="@ReportPeriodicity.Daily" />
+
+
+<a asp-action="Create" class="btn btn-primary float-end ms-3">Create a new transaction</a>
+@if (Model.GroupedTransactions.Count() != 0)
+{
+    <a asp-action="ExportMonthlyReportToExcel" asp-route-month="@Model.StartDate.Month" asp-route-year="@Model.EndDate.Year" class="btn btn-success float-end">Download Excel</a>
+}
+
+<h1> @ViewBag.AccountName</h1>
+
+<partial name="_DetailedReportView" model="Model" />
