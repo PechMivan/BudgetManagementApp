@@ -11,7 +11,7 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  projectMVC: 'ManejoPresupuesto/ManejoPresupuesto.csproj'
+  projectMVC: 'BudgetManagement/BudgetManagement.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
